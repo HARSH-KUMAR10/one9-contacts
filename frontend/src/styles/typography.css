@@ -1,0 +1,26 @@
+.big {
+  font-size: var(--font-big);
+  font-weight: bold;
+}
+
+.medium {
+  font-size: var(--font-medium);
+  font-weight: normal;
+}
+
+.small {
+  font-size: var(--font-small);
+  font-weight: normal;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.text-left {
+  text-align: left;
+}

@@ -1,0 +1,50 @@
+/* Color Variables */
+:root {
+  --color-black: #222;
+  --color-white: #ccc;
+  --color-blue: #2962ff;
+
+  /* Font Sizes */
+  --font-big: 1.5rem;
+  --font-medium: 1rem;
+  --font-small: 0.875rem;
+
+  /* Spacing */
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  font-family: Verdana, Geneva, sans-serif;
+  background-color: var(--color-black);
+  color: var(--color-white);
+  line-height: 1.5;
+}
+
+a {
+  color: var(--color-blue);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+button,
+input,
+textarea,
+select {
+  font-family: Verdana, Geneva, sans-serif;
+}
