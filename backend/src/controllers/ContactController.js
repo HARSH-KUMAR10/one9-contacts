@@ -33,8 +33,8 @@ export class ContactController {
     try {
       const { name, email, phone, notes } = req.body;
 
-      if (!name || !email) {
-        return sendError(res, 400, "Name and email are required");
+      if (!name) {
+        return sendError(res, 400, "Name is required");
       }
 
       const contact = await contactService.createContact({

@@ -18,12 +18,19 @@ export class ContactService {
     if (!contactsData || !contactsData.length) return [];
     
     // Process records
-    const processedContacts = contactsData.map((data) => ({
-      ...data,
-      isActive: true,
-      createdAt: new Date(),
-      updatedAt: new Date(),
-    }));
+    const processedContacts = contactsData.map((data) => {
+      const contact = {
+        ...data,
+        isActive: true,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      };
+      // Prevent duplicate key errors on empty emails if the DB has a unique index
+      if (!contact.email) {
+        delete contact.email;
+      }
+      return contact;
+    });
 
     // Perform bulk insertion
     return await Contact.insertMany(processedContacts, { ordered: false });

@@ -85,6 +85,8 @@
       }
     } catch (err) {
       console.error("Failed to read contacts", err);
+      // Ensure the user actually sees an error message on their device
+      error.set("Failed to read contacts from your device. " + (err.message || "Permission might be denied or unsupported."));
     }
   }
 
