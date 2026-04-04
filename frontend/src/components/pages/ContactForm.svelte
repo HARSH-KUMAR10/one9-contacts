@@ -9,13 +9,13 @@
   export let show = false;
   export let contact = null;
 
-  let formData = { name: "", email: "", phone: "", notes: "" };
+  let formData = { name: "", email: "", phone: "", company: "", notes: "" };
   let formError = null;
 
   $: if (contact) {
     formData = { ...contact };
   } else {
-    formData = { name: "", email: "", phone: "", notes: "" };
+    formData = { name: "", email: "", phone: "", company: "", notes: "" };
   }
 
   const handleSubmit = async (e) => {
@@ -24,6 +24,11 @@
 
     if (!formData.name || !formData.email) {
       formError = "Name and email are required";
+      return;
+    }
+
+    if (formData.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+      formError = "Please enter a valid email address";
       return;
     }
 
@@ -40,7 +45,7 @@
       const event = new CustomEvent("submit");
       window.dispatchEvent(event);
     } catch (err) {
-      formError = "Failed to save contact";
+      formError = err.message || "Failed to save contact";
     }
     loading.set(false);
   };
@@ -86,6 +91,14 @@
       name="phone"
       bind:value={formData.phone}
       placeholder="Enter phone number"
+    />
+
+    <Input
+      label="Company"
+      type="text"
+      name="company"
+      bind:value={formData.company}
+      placeholder="Enter company name"
     />
 
     <Input

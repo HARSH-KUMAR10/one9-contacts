@@ -1,5 +1,13 @@
 const API_URL = "/api/v1";
 
+const handleResponse = async (response) => {
+  const json = await response.json();
+  if (!response.ok) {
+    throw new Error(json.message || `API Error: ${response.status}`);
+  }
+  return json;
+};
+
 export const apiClient = {
   async get(endpoint) {
     const token = localStorage.getItem("auth_token");
@@ -12,7 +20,7 @@ export const apiClient = {
     }
 
     const response = await fetch(`${API_URL}${endpoint}`, { headers });
-    return response.json();
+    return handleResponse(response);
   },
 
   async post(endpoint, data) {
@@ -30,7 +38,7 @@ export const apiClient = {
       headers,
       body: JSON.stringify(data),
     });
-    return response.json();
+    return handleResponse(response);
   },
 
   async put(endpoint, data) {
@@ -48,7 +56,7 @@ export const apiClient = {
       headers,
       body: JSON.stringify(data),
     });
-    return response.json();
+    return handleResponse(response);
   },
 
   async delete(endpoint) {
@@ -63,6 +71,6 @@ export const apiClient = {
       method: "DELETE",
       headers,
     });
-    return response.json();
+    return handleResponse(response);
   },
 };

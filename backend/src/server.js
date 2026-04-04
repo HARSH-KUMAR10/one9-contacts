@@ -9,6 +9,7 @@ import { errorHandler, notFoundHandler } from "./middleware/errorHandler.js";
 import { authMiddleware } from "./middleware/auth.js";
 import authRoutes from "./routes/auth.js";
 import contactRoutes from "./routes/contacts.js";
+import interactionRoutes from "./routes/interactions.js";
 
 const app = express();
 
@@ -30,6 +31,7 @@ app.use(express.static("frontend/dist"));
 // Routes
 app.use(`${config.api.prefix}/auth`, authRoutes);
 app.use(`${config.api.prefix}/contacts`, authMiddleware, contactRoutes);
+app.use(`${config.api.prefix}/interactions`, authMiddleware, interactionRoutes);
 
 // Health check
 app.get(`${config.api.prefix}/health`, (req, res) => {
@@ -37,7 +39,7 @@ app.get(`${config.api.prefix}/health`, (req, res) => {
 });
 
 // Fallback to frontend
-app.get("*", (req, res) => {
+app.get(/(.*)/, (req, res) => {
   res.sendFile("frontend/dist/index.html", { root: "." });
 });
 
